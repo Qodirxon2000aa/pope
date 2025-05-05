@@ -2,39 +2,61 @@ import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import SearchIcon from '@mui/icons-material/Search';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HomeIcon from '@mui/icons-material/Home';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import HistoryIcon from '@mui/icons-material/History';
 import XIcon from '@mui/icons-material/X';
+import MenuIcon from '@mui/icons-material/Menu';
 import VideoData from '../data/VideoData';
-import { gsap } from 'gsap';
 
-// Gothic Color Palette
+// Futuristic Color Palette
 const colors = {
   background: {
-    primary: '#0A0A0A',
-    secondary: '#131313',
-    tertiary: '#1C1C1C',
+    primary: '#0A1322', // Dark navy
+    secondary: '#1B263B', // Darker navy
+    tertiary: '#2A3A5A', // Medium navy
   },
   accent: {
-    primary: '#8B0000',
-    secondary: '#4A0404',
-    highlight: '#B30000',
+    cyan: '#00D4FF', // Neon cyan
+    magenta: '#FF007A', // Neon magenta
+    highlight: '#00B7EB', // Light cyan
   },
   text: {
-    primary: '#C0C0C0',
-    secondary: '#767676',
-    highlight: '#DEDEDE',
+    primary: '#F5F7FA', // Soft white
+    secondary: '#A3BFFA', // Light blue-gray
+    highlight: '#FFFFFF', // Pure white
   },
   border: {
-    primary: '#333',
-    highlight: '#4A0404',
+    primary: '#2A3A5A', // Navy border
+    cyan: '#00D4FF', // Neon cyan border
   },
 };
 
+// Keyframes for animations
+const keyframes = `
+  @keyframes glow {
+    0% { box-shadow: 0 0 5px ${colors.accent.cyan}, 0 0 10px ${colors.accent.cyan}; }
+    50% { box-shadow: 0 0 10px ${colors.accent.cyan}, 0 0 20px ${colors.accent.cyan}; }
+    100% { box-shadow: 0 0 5px ${colors.accent.cyan}, 0 0 10px ${colors.accent.cyan}; }
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+  }
+`;
+
 const Navigation = () => {
   const [isMobile, setIsMobile] = useState(window.matchMedia('(max-width: 768px)').matches);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(!isMobile);
   const [hoveredLink, setHoveredLink] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const navbarRef = useRef(null);
@@ -42,29 +64,52 @@ const Navigation = () => {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
-    const handleMediaChange = (e) => setIsMobile(e.matches);
+    const handleMediaChange = (e) => {
+      setIsMobile(e.matches);
+      setIsSidebarOpen(!e.matches); // Auto-open sidebar on desktop
+    };
 
     mediaQuery.addEventListener('change', handleMediaChange);
     return () => mediaQuery.removeEventListener('change', handleMediaChange);
   }, []);
 
   useEffect(() => {
-    gsap.fromTo(
-      navbarRef.current,
-      { opacity: 0, y: -70 },
-      { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }
-    );
-    gsap.fromTo(
-      sidebarRef.current,
-      { opacity: 0, x: isMobile ? 0 : 70 },
-      { opacity: 1, x: 0, duration: 1.4, ease: 'power3.out', delay: 0.3 }
-    );
-    gsap.fromTo(
-      sidebarRef.current.querySelectorAll('li, a'),
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 1, stagger: 0.15, ease: 'back.out(1.2)', delay: 0.7 }
-    );
-  }, [isMobile]);
+    // Inject keyframes and global styles
+    const styleSheet = document.createElement('style');
+    styleSheet.innerText = `
+      ${keyframes}
+      :root {
+        --sidebar-width: ${isMobile ? '0px' : isSidebarOpen ? '240px' : '0px'};
+      }
+      .main-content {
+        margin-right: var(--sidebar-width);
+        width: calc(100% - var(--sidebar-width));
+        transition: margin-right 0.5s ease, width 0.5s ease, transform 0.5s ease;
+        transform: ${isSidebarOpen && !isMobile ? 'scale(0.98)' : 'scale(1)'};
+      }
+    `;
+    document.head.appendChild(styleSheet);
+
+    // Animate navbar
+    navbarRef.current.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    navbarRef.current.style.opacity = '1';
+    navbarRef.current.style.transform = 'translateY(0)';
+
+    // Animate sidebar
+    sidebarRef.current.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    sidebarRef.current.style.animation = isSidebarOpen ? 'slideIn 0.5s ease forwards' : 'slideOut 0.5s ease forwards';
+
+    const sidebarItems = sidebarRef.current.querySelectorAll('li, a');
+    sidebarItems.forEach((item, index) => {
+      item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      item.style.opacity = isSidebarOpen ? '1' : '0';
+      item.style.transform = isSidebarOpen ? 'translateY(0)' : 'translateY(20px)';
+      item.style.transitionDelay = `${index * 0.1}s`;
+    });
+
+    // Update main content styles
+    document.documentElement.style.setProperty('--sidebar-width', isMobile ? '0px' : isSidebarOpen ? '240px' : '0px');
+  }, [isMobile, isSidebarOpen]);
 
   const filteredVideos = React.useMemo(() => {
     if (!searchQuery.trim()) return [];
@@ -81,42 +126,40 @@ const Navigation = () => {
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    padding: isMobile ? '10px 14px' : '14px 24px',
-    background: `linear-gradient(180deg, ${colors.background.primary}, ${colors.background.secondary})`,
+    padding: isMobile ? '8px 12px' : '12px 20px',
+    background: colors.background.primary,
     position: 'fixed',
     top: 0,
     left: 0,
     zIndex: 1000,
-    height: isMobile ? '52px' : '64px',
-    boxShadow: `0 4px 12px rgba(0, 0, 0, 0.8), inset 0 0 15px ${colors.accent.secondary}`,
-    borderBottom: `1px solid ${colors.accent.secondary}`,
+    height: isMobile ? '56px' : '64px',
+    borderBottom: `2px solid ${colors.border.cyan}`,
+    boxShadow: `0 0 10px ${colors.accent.cyan}`,
   };
 
   const logoStyle = {
-    fontSize: isMobile ? '20px' : '24px',
+    fontSize: isMobile ? '22px' : '26px',
     fontWeight: '700',
     color: colors.text.primary,
     display: 'flex',
     alignItems: 'center',
     gap: isMobile ? '6px' : '8px',
-    fontFamily: 'var(--font-heading)',
-    textShadow: `0 0 8px ${colors.accent.primary}, 0 0 15px rgba(139, 0, 0, 0.5)`,
-    letterSpacing: '1px',
-    transition: 'all 0.4s ease',
+    fontFamily: '"Orbitron", sans-serif',
+    letterSpacing: '1.5px',
+    transition: 'all 0.3s ease',
+    textTransform: 'uppercase',
   };
 
   const searchContainerStyle = {
     display: 'flex',
     alignItems: 'center',
     flex: 1,
-    maxWidth: isMobile ? '100%' : '600px',
-    margin: isMobile ? '0 8px' : '0 20px',
+    maxWidth: isMobile ? '100%' : '700px',
+    margin: isMobile ? '0 8px' : '0 24px',
     backgroundColor: colors.background.secondary,
-    borderRadius: '6px',
-    padding: isMobile ? '4px 8px' : '7px 14px',
-    boxShadow: `inset 0 2px 6px rgba(0, 0, 0, 0.8), 0 0 5px ${colors.accent.secondary}`,
-    border: `1px solid ${colors.accent.secondary}`,
-    position: 'relative',
+    borderRadius: '30px',
+    padding: isMobile ? '6px 12px' : '8px 16px',
+    border: `2px solid ${colors.border.primary}`,
     transition: 'all 0.3s ease',
   };
 
@@ -126,19 +169,19 @@ const Navigation = () => {
     border: 'none',
     outline: 'none',
     color: colors.text.primary,
-    fontSize: isMobile ? '13px' : '15px',
-    padding: isMobile ? '3px' : '6px',
-    fontFamily: 'var(--font-primary)',
+    fontSize: isMobile ? '14px' : '16px',
+    padding: isMobile ? '4px' : '6px',
+    fontFamily: '"Poppins", sans-serif',
     fontWeight: '400',
     letterSpacing: '0.5px',
     transition: 'color 0.3s ease',
-    caretColor: colors.accent.primary,
+    caretColor: colors.accent.cyan,
   };
 
   const searchIconStyle = {
     color: colors.text.secondary,
-    fontSize: isMobile ? '18px' : '20px',
-    transition: 'color 0.3s ease',
+    fontSize: isMobile ? '22px' : '24px',
+    transition: 'color 0.3s ease, transform 0.3s ease',
   };
 
   const searchResultsStyle = {
@@ -147,21 +190,21 @@ const Navigation = () => {
     left: 0,
     right: 0,
     backgroundColor: colors.background.secondary,
-    borderRadius: '6px',
-    boxShadow: `0 4px 12px rgba(0, 0, 0, 0.8), 0 0 8px ${colors.accent.secondary}`,
-    border: `1px solid ${colors.accent.secondary}`,
-    marginTop: '8px',
+    borderRadius: '16px',
+    border: `2px solid ${colors.border.cyan}`,
+    marginTop: '12px',
     zIndex: 1001,
     maxHeight: '320px',
     overflowY: 'auto',
     scrollbarWidth: 'thin',
-    scrollbarColor: `${colors.accent.primary} ${colors.background.tertiary}`,
+    scrollbarColor: `${colors.accent.cyan} ${colors.background.tertiary}`,
+    boxShadow: `0 0 10px ${colors.accent.cyan}`,
   };
 
   const searchResultItemStyle = {
     display: 'flex',
     alignItems: 'center',
-    padding: isMobile ? '8px 10px' : '10px 14px',
+    padding: isMobile ? '10px 12px' : '12px 16px',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
     color: colors.text.primary,
@@ -169,14 +212,13 @@ const Navigation = () => {
   };
 
   const thumbnailStyle = {
-    width: isMobile ? '60px' : '80px',
-    height: isMobile ? '34px' : '45px',
-    borderRadius: '4px',
+    width: isMobile ? '64px' : '88px',
+    height: isMobile ? '36px' : '50px',
+    borderRadius: '6px',
     objectFit: 'cover',
-    marginRight: isMobile ? '8px' : '12px',
-    border: `1px solid ${colors.border.primary}`,
+    marginRight: isMobile ? '10px' : '14px',
+    border: `1px solid ${colors.border.cyan}`,
     transition: 'all 0.3s ease',
-    boxShadow: `0 0 8px rgba(0, 0, 0, 0.6)`,
   };
 
   const resultTextStyle = {
@@ -184,10 +226,10 @@ const Navigation = () => {
   };
 
   const resultTitleStyle = {
-    fontSize: isMobile ? '12px' : '14px',
+    fontSize: isMobile ? '14px' : '16px',
     fontWeight: '600',
     color: colors.text.primary,
-    fontFamily: 'var(--font-heading)',
+    fontFamily: '"Orbitron", sans-serif',
     display: '-webkit-box',
     WebkitLineClamp: 1,
     WebkitBoxOrient: 'vertical',
@@ -196,196 +238,178 @@ const Navigation = () => {
   };
 
   const resultChannelStyle = {
-    fontSize: isMobile ? '10px' : '12px',
+    fontSize: isMobile ? '12px' : '14px',
     color: colors.text.secondary,
     fontWeight: '400',
-    fontFamily: 'var(--font-primary)',
+    fontFamily: '"Poppins", sans-serif',
     letterSpacing: '0.5px',
-    marginTop: '2px',
+    marginTop: '4px',
   };
 
-  const profileLinkStyle = {
-    color: colors.text.primary,
-    padding: isMobile ? '6px' : '9px',
+  const toggleButtonStyle = {
+    display: isMobile ? 'none' : 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '10px',
+    backgroundColor: colors.background.secondary,
     borderRadius: '50%',
+    border: `2px solid ${colors.border.cyan}`,
+    cursor: 'pointer',
     transition: 'all 0.3s ease',
-    backgroundColor: 'transparent',
   };
 
   // Sidebar Styles
   const sidebarStyle = isMobile
     ? {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      width: '100%',
-      padding: '12px 18px',
-      background: `linear-gradient(180deg, ${colors.background.secondary}, ${colors.background.primary})`,
-      boxShadow: `0 -4px 12px rgba(0, 0, 0, 0.8), inset 0 0 15px ${colors.accent.secondary}`,
-      position: 'fixed',
-      bottom: 0,
-      left: 0,
-      zIndex: 1000,
-      borderTop: `1px solid ${colors.accent.secondary}`,
-    }
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        width: '100%',
+        padding: '10px 12px',
+        background: colors.background.primary,
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        zIndex: 1000,
+        borderTop: `2px solid ${colors.border.cyan}`,
+        boxShadow: `0 -2px 10px ${colors.accent.cyan}`,
+      }
     : {
-      display: 'flex',
-      flexDirection: 'column',
-      width: '240px',
-      height: 'calc(100vh - 64px)',
-      padding: '20px 24px',
-      background: `linear-gradient(90deg, ${colors.background.secondary}, ${colors.background.primary})`,
-      position: 'fixed',
-      top: '64px',
-      right: 0,
-      zIndex: 1000,
-      boxShadow: `-4px 0 12px rgba(0, 0, 0, 0.8), inset 0 0 15px ${colors.accent.secondary}`,
-      borderLeft: `1px solid ${colors.accent.secondary}`,
-    };
+        display: 'flex',
+        flexDirection: 'column',
+        width: '240px',
+        height: 'calc(100vh - 64px)',
+        padding: '20px 24px',
+        background: colors.background.primary,
+        position: 'fixed',
+        top: '64px',
+        right: 0,
+        zIndex: 1000,
+        borderLeft: `2px solid ${colors.border.cyan}`,
+        boxShadow: `0 0 10px ${colors.accent.cyan}`,
+      };
 
   const sidebarLogoStyle = isMobile
     ? { display: 'none' }
     : {
-      fontSize: '22px',
-      fontWeight: '700',
-      color: colors.text.primary,
-      display: 'flex',
-      alignItems: 'center',
-      gap: '10px',
-      marginBottom: '24px',
-      fontFamily: 'var(--font-heading)',
-      textShadow: `0 0 8px ${colors.accent.primary}, 0 0 15px rgba(139, 0, 0, 0.5)`,
-      letterSpacing: '1px',
-      transition: 'all 0.4s ease',
-    };
+        fontSize: '22px',
+        fontWeight: '700',
+        color: colors.text.primary,
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        marginBottom: '24px',
+        fontFamily: '"Orbitron", sans-serif',
+        letterSpacing: '1.5px',
+        transition: 'all 0.3s ease',
+        textTransform: 'uppercase',
+      };
 
   const navLinksStyle = isMobile
     ? {
-      display: 'flex',
-      flexDirection: 'row',
-      gap: '16px',
-      flex: 1,
-      justifyContent: 'flex-end',
-    }
+        display: 'flex',
+        flexDirection: 'row',
+        gap: '16px',
+        flex: 1,
+        justifyContent: 'space-around',
+      }
     : {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '14px',
-      flex: 1,
-      marginBottom: '20px',
-    };
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        flex: 1,
+        marginBottom: '20px',
+      };
 
   const linkStyle = isMobile
     ? {
-      padding: '8px',
-      borderRadius: '6px',
-      transition: 'all 0.4s ease',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: colors.background.tertiary,
-      boxShadow: `inset 0 0 5px rgba(0, 0, 0, 0.5), 0 0 5px ${colors.accent.secondary}`,
-      border: `1px solid ${colors.border.primary}`,
-    }
+        padding: '12px',
+        borderRadius: '50%',
+        transition: 'all 0.3s ease',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: colors.background.tertiary,
+        border: `2px solid ${colors.border.primary}`,
+      }
     : {
-      color: colors.text.primary,
-      fontSize: '16px',
-      fontWeight: '500',
-      padding: '12px 16px',
-      borderRadius: '6px',
-      transition: 'all 0.4s ease',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '12px',
-      fontFamily: 'var(--font-primary)',
-      backgroundColor: colors.background.tertiary,
-      boxShadow: `inset 0 0 5px rgba(0, 0, 0, 0.5), 0 0 5px ${colors.accent.secondary}`,
-      border: `1px solid ${colors.border.primary}`,
-      letterSpacing: '0.5px',
-      position: 'relative',
-      overflow: 'hidden',
-    };
-
-  const linkDecorationStyle = !isMobile
-    ? {
-      content: '""',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '5px',
-      height: '100%',
-      background: colors.accent.primary,
-      transform: 'scaleY(0)',
-      transformOrigin: 'top',
-      transition: 'transform 0.4s ease',
-    }
-    : {};
+        color: colors.text.primary,
+        fontSize: '16px',
+        fontWeight: '500',
+        padding: '12px 16px',
+        borderRadius: '16px',
+        transition: 'all 0.3s ease',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
+        fontFamily: '"Poppins", sans-serif',
+        backgroundColor: colors.background.tertiary,
+        border: `2px solid ${colors.border.primary}`,
+        letterSpacing: '0.5px',
+      };
 
   const activeLinkStyle = isMobile
     ? {
-      ...linkStyle,
-      backgroundColor: colors.background.secondary,
-      boxShadow: `0 0 12px ${colors.accent.primary}, inset 0 0 8px ${colors.accent.primary}`,
-      border: `1px solid ${colors.accent.primary}`,
-    }
+        ...linkStyle,
+        backgroundColor: colors.accent.cyan,
+        border: `2px solid ${colors.accent.cyan}`,
+        animation: 'glow 1.5s infinite, pulse 1.5s infinite',
+      }
     : {
-      ...linkStyle,
-      color: colors.text.highlight,
-      backgroundColor: colors.background.secondary,
-      boxShadow: `0 0 12px ${colors.accent.primary}, inset 0 0 8px ${colors.accent.primary}`,
-      border: `1px solid ${colors.accent.primary}`,
-      transform: 'translateX(-5px)',
-    };
+        ...linkStyle,
+        color: colors.text.highlight,
+        backgroundColor: colors.accent.cyan,
+        border: `2px solid ${colors.accent.cyan}`,
+        animation: 'glow 1.5s infinite, pulse 1.5s infinite',
+      };
 
   const hoverLinkStyle = isMobile
     ? {
-      ...linkStyle,
-      backgroundColor: colors.background.secondary,
-      boxShadow: `0 0 12px ${colors.accent.primary}, inset 0 0 8px ${colors.accent.primary}`,
-      border: `1px solid ${colors.accent.primary}`,
-    }
+        ...linkStyle,
+        backgroundColor: colors.accent.cyan,
+        border: `2px solid ${colors.accent.cyan}`,
+        animation: 'glow 1.5s infinite, pulse 1.5s infinite',
+      }
     : {
-      ...linkStyle,
-      color: colors.text.highlight,
-      backgroundColor: colors.background.secondary,
-      boxShadow: `0 0 12px ${colors.accent.primary}, inset 0 0 8px ${colors.accent.primary}`,
-      border: `1px solid ${colors.accent.primary}`,
-      transform: 'translateX(-5px)',
-    };
+        ...linkStyle,
+        color: colors.text.highlight,
+        backgroundColor: colors.accent.cyan,
+        border: `2px solid ${colors.accent.cyan}`,
+        animation: 'glow 1.5s infinite, pulse 1.5s infinite',
+      };
 
   const getLinkStyle = (isActive, linkName) =>
     isActive ? activeLinkStyle : hoveredLink === linkName ? hoverLinkStyle : linkStyle;
 
   const iconStyle = {
     color: colors.text.primary,
-    fontSize: isMobile ? '20px' : '24px',
+    fontSize: isMobile ? '26px' : '28px',
     transition: 'all 0.3s ease',
-    filter: `drop-shadow(0 0 2px ${colors.accent.secondary})`,
   };
 
   const activeIconStyle = {
     ...iconStyle,
     color: colors.text.highlight,
-    filter: `drop-shadow(0 0 4px ${colors.accent.primary})`,
+    filter: `drop-shadow(0 0 6px ${colors.accent.cyan})`,
   };
 
   const getIconStyle = (isActive) => (isActive ? activeIconStyle : iconStyle);
 
   const links = [
     {
-      name: 'Pope Tube',
+      name: 'Home',
       icon: <HomeIcon style={getIconStyle(hoveredLink === 'home')} />,
       to: '/',
     },
     {
-      name: 'Holy leaks',
-      icon: <LocalFireDepartmentIcon style={getIconStyle(hoveredLink === 'unholy fire')} />,
+      name: 'Trending',
+      icon: <LocalFireDepartmentIcon style={getIconStyle(hoveredLink === 'trending')} />,
       to: '/hot',
     },
     {
-      name: 'Dark Past',
-      icon: <HistoryIcon style={getIconStyle(hoveredLink === 'dark past')} />,
+      name: 'History',
+      icon: <HistoryIcon style={getIconStyle(hoveredLink === 'history')} />,
       to: '/history',
     },
   ];
@@ -397,55 +421,54 @@ const Navigation = () => {
           to="/"
           style={logoStyle}
           onMouseEnter={(e) => {
-            e.currentTarget.style.textShadow = `0 0 12px ${colors.accent.highlight}, 0 0 20px ${colors.accent.primary}`;
-            e.currentTarget.style.color = colors.text.highlight;
+            e.currentTarget.style.color = colors.accent.cyan;
             e.currentTarget.style.transform = 'scale(1.05)';
+            e.currentTarget.style.animation = 'pulse 1.5s infinite';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.textShadow = `0 0 8px ${colors.accent.primary}, 0 0 15px rgba(139, 0, 0, 0.5)`;
             e.currentTarget.style.color = colors.text.primary;
             e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.animation = 'none';
           }}
         >
           <VideoLibraryIcon
             style={{
               color: colors.text.primary,
-              fontSize: isMobile ? '20px' : '24px',
-              filter: `drop-shadow(0 0 2px ${colors.accent.primary})`,
+              fontSize: isMobile ? '26px' : '30px',
+              transition: 'all 0.3s ease',
             }}
           />
           POPE TUBE
         </NavLink>
-        <div
-          style={searchContainerStyle}
-          id="search-container"
-        >
+        <div style={searchContainerStyle} id="search-container">
           <input
             type="text"
-            placeholder="Search the crypt for souls..."
+            placeholder="Explore the grid..."
             style={searchInputStyle}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={(e) => {
               e.target.style.color = colors.text.highlight;
-              document.querySelector('#search-container').style.boxShadow = `inset 0 2px 6px rgba(0, 0, 0, 0.8), 0 0 10px ${colors.accent.primary}`;
-              document.querySelector('#search-container').style.borderColor = colors.accent.primary;
+              document.querySelector('#search-container').style.borderColor = colors.accent.cyan;
+              document.querySelector('#search-container').style.boxShadow = `0 0 12px ${colors.accent.cyan}`;
             }}
             onBlur={(e) => {
               e.target.style.color = colors.text.primary;
-              document.querySelector('#search-container').style.boxShadow = `inset 0 2px 6px rgba(0, 0, 0, 0.8), 0 0 5px ${colors.accent.secondary}`;
-              document.querySelector('#search-container').style.borderColor = colors.accent.secondary;
+              document.querySelector('#search-container').style.borderColor = colors.border.primary;
+              document.querySelector('#search-container').style.boxShadow = 'none';
             }}
           />
           <SearchIcon
             style={searchIconStyle}
             onMouseEnter={(e) => {
-              e.currentTarget.style.color = colors.accent.primary;
-              e.currentTarget.style.transform = 'scale(1.1)';
+              e.currentTarget.style.color = colors.accent.cyan;
+              e.currentTarget.style.transform = 'scale(1.15)';
+              e.currentTarget.style.animation = 'pulse 1.5s infinite';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.color = colors.text.secondary;
               e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.animation = 'none';
             }}
           />
           {filteredVideos.length > 0 && (
@@ -461,17 +484,17 @@ const Navigation = () => {
                     style={searchResultItemStyle}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = colors.background.tertiary;
-                      e.currentTarget.style.textShadow = `0 0 5px ${colors.accent.primary}`;
-                      e.currentTarget.style.borderColor = colors.accent.primary;
-                      e.currentTarget.querySelector('img').style.borderColor = colors.accent.primary;
-                      e.currentTarget.querySelector('img').style.boxShadow = `0 0 8px ${colors.accent.secondary}`;
+                      e.currentTarget.style.borderColor = colors.accent.cyan;
+                      e.currentTarget.style.animation = 'pulse 1.5s infinite';
+                      e.currentTarget.querySelector('img').style.borderColor = colors.accent.cyan;
+                      e.currentTarget.querySelector('img').style.boxShadow = `0 0 8px ${colors.accent.cyan}`;
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = 'transparent';
-                      e.currentTarget.style.textShadow = 'none';
                       e.currentTarget.style.borderColor = colors.border.primary;
+                      e.currentTarget.style.animation = 'none';
                       e.currentTarget.querySelector('img').style.borderColor = colors.border.primary;
-                      e.currentTarget.querySelector('img').style.boxShadow = '0 0 8px rgba(0, 0, 0, 0.6)';
+                      e.currentTarget.querySelector('img').style.boxShadow = 'none';
                     }}
                   >
                     <img
@@ -492,37 +515,30 @@ const Navigation = () => {
             </div>
           )}
         </div>
-        <NavLink
-          to="/profile"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                ...profileLinkStyle,
-                boxShadow: `0 0 12px ${colors.accent.primary}`,
-                backgroundColor: colors.background.secondary,
-                transform: 'scale(1.1)',
-              }
-              : profileLinkStyle
-          }
-          onMouseEnter={(e) => {
-            e.currentTarget.style.boxShadow = `0 0 12px ${colors.accent.primary}`;
-            e.currentTarget.style.backgroundColor = colors.background.secondary;
-            e.currentTarget.style.transform = 'scale(1.1)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.boxShadow = 'none';
-            e.currentTarget.style.backgroundColor = 'transparent';
-            e.currentTarget.style.transform = 'scale(1)';
-          }}
-        >
-          {/* <AccountCircleIcon
-            style={{
-              color: colors.text.primary,
-              fontSize: isMobile ? '20px' : '24px',
-              filter: `drop-shadow(0 0 2px ${colors.accent.primary})`,
+        {!isMobile && (
+          <div
+            style={toggleButtonStyle}
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = colors.accent.cyan;
+              e.currentTarget.style.animation = 'glow 1.5s infinite';
+              e.currentTarget.style.transform = 'scale(1.1)';
             }}
-          /> */}
-        </NavLink>
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = colors.background.secondary;
+              e.currentTarget.style.animation = 'none';
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
+          >
+            <MenuIcon
+              style={{
+                color: colors.text.primary,
+                fontSize: '26px',
+                transition: 'all 0.3s ease',
+              }}
+            />
+          </div>
+        )}
       </nav>
 
       <nav ref={sidebarRef} style={sidebarStyle}>
@@ -530,39 +546,29 @@ const Navigation = () => {
           <div
             style={sidebarLogoStyle}
             onMouseEnter={(e) => {
-              e.currentTarget.style.textShadow = `0 0 12px ${colors.accent.highlight}, 0 0 20px ${colors.accent.primary}`;
-              e.currentTarget.style.color = colors.text.highlight;
+              e.currentTarget.style.color = colors.accent.cyan;
               e.currentTarget.style.transform = 'scale(1.05)';
+              e.currentTarget.style.animation = 'pulse 1.5s infinite';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.textShadow = `0 0 8px ${colors.accent.primary}, 0 0 15px rgba(139, 0, 0, 0.5)`;
               e.currentTarget.style.color = colors.text.primary;
               e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.animation = 'none';
             }}
           >
             <VideoLibraryIcon
               style={{
                 color: colors.text.primary,
-                fontSize: '24px',
-                filter: `drop-shadow(0 0 2px ${colors.accent.primary})`,
+                fontSize: '26px',
+                transition: 'all 0.3s ease',
               }}
             />
-CHOOSE          </div>
+            CHOOSE
+          </div>
         )}
         <ul style={navLinksStyle}>
           {links.map((link) => (
-            <li key={link.name} style={{ position: 'relative' }}>
-              {!isMobile && (
-                <div
-                  style={{
-                    ...linkDecorationStyle,
-                    transform:
-                      hoveredLink === link.name.toLowerCase() || window.location.pathname === link.to
-                        ? 'scaleY(1)'
-                        : 'scaleY(0)',
-                  }}
-                />
-              )}
+            <li key={link.name}>
               <NavLink
                 to={link.to}
                 style={({ isActive }) => getLinkStyle(isActive, link.name.toLowerCase())}
@@ -588,7 +594,7 @@ CHOOSE          </div>
           onMouseLeave={() => setHoveredLink(null)}
         >
           <XIcon style={getIconStyle(hoveredLink === 'follow-us')} />
-          {!isMobile && <span>Follow Our Darkness</span>}
+          {!isMobile && <span>Connect</span>}
         </a>
       </nav>
     </>

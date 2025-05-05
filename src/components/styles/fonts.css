@@ -1,20 +1,153 @@
-/* Import Google Fonts for MedievalSharp and Goudy Old Style */
+/* Import Google Fonts for Inter and Playfair Display */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Goudy+Old+Style&display=swap');
-/* Define font variables */
-
+/* Define CSS custom properties for modern styling */
 :root {
-	--font-primary: 'MedievalSharp', 'Goudy Old Style', serif;
-	--font-heading: 'UnifrakturCook', 'MedievalSharp', 'Goudy Old Style', serif;
+  /* Fonts */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Playfair Display', 'Times New Roman', Times, serif;
+
+  /* Colors */
+  --color-background: #1C2526; /* Charcoal */
+  --color-secondary: #2A3439; /* Darker charcoal */
+  --color-tertiary: #3A4648; /* Medium charcoal */
+  --color-text-primary: #E8ECEF; /* Ivory */
+  --color-text-secondary: #B1B7BC; /* Light gray */
+  --color-text-highlight: #FFFFFF; /* Pure white */
+  --color-accent-primary: #2E4057; /* Midnight blue */
+  --color-accent-secondary: #1B263B; /* Darker blue */
+  --color-accent-highlight: #415A77; /* Light blue */
+  --color-accent-bronze: #A68A64; /* Burnished bronze */
+  --color-border-primary: #4A5859; /* Dark border */
+  --color-border-highlight: #2E4057; /* Blue border */
+  --color-border-bronze: #A68A64; /* Bronze border */
+
+  /* Spacing */
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+
+  /* Transitions */
+  --transition-default: all 0.3s ease;
+  --transition-slow: all 0.4s ease;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
-/* Fallback for UnifrakturCook if not locally available */
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-@font-face {
-	font-family: 'UnifrakturCook';
-	src: local('UnifrakturCook'),
-		url('../fonts/MedievalSharp-Regular.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
+body {
+  font-family: var(--font-primary);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Links */
+a {
+  color: var(--color-accent-primary);
+  text-decoration: none;
+  transition: var(--transition-default);
+}
+
+a:hover {
+  color: var(--color-accent-highlight);
+  text-decoration: underline;
+}
+
+/* Buttons */
+button {
+  font-family: var(--font-primary);
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-highlight);
+  border: 1px solid var(--color-border-highlight);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition-default);
+}
+
+button:hover {
+  background-color: var(--color-accent-highlight);
+  border-color: var(--color-accent-bronze);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Containers */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+/* Cards */
+.card {
+  background-color: var(--color-tertiary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-slow);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-border-bronze);
+}
+
+/* Utility classes */
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-highlight {
+  color: var(--color-text-highlight);
+}
+
+.text-bronze {
+  color: var(--color-accent-bronze);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.border-bronze {
+  border-color: var(--color-border-bronze);
+}
+
+.transition {
+  transition: var(--transition-default);
 }
