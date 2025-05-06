@@ -438,7 +438,7 @@ const Navigation = () => {
               transition: 'all 0.3s ease',
             }}
           />
-          POPE TUBE
+          TrenchesTube
         </NavLink>
         <div style={searchContainerStyle} id="search-container">
           <input

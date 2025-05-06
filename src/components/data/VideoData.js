@@ -331,4 +331,4 @@ const VideoData = [
 	},
 ]
 
-export default VideoData;
+export default VideoData
