@@ -1,334 +1,334 @@
 const VideoData = [
 	{
-		id: '70XZ__44CEc',
+		id: 'CNx4I-ySEp4',
 		snippet: {
-			title: 'Unveiled: The Vatican’s Secret Archives on Hell',
-			channelTitle: 'VaticanChronicles',
+			title: 'How To Get Rich With Memecoins In 2025',
+			channelTitle: 'Orangie Web3',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/70XZ__44CEc/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/CNx4I-ySEp4/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-05-01T08:00:00Z',
 			description:
-				'Explore the hidden documents in the Vatican Secret Archives that allegedly describe a portal to hell beneath St. Peter’s Basilica. What truths are they hiding?',
+				'A comprehensive guide on strategies to profit from memecoins in 2025, including market analysis and trading tips.',
 		},
 		statistics: {
-			viewCount: '150K',
-			likeCount: '18K',
-			commentCount: '3K',
+			viewCount: '532K',
+			likeCount: '20K',
+			commentCount: '4K',
 		},
 	},
 	{
-		id: 'GeCodRjs1Bs',
+		id: 'B_2C1A99QQE',
 		snippet: {
-			title: 'The Vatican’s Pact with the Underworld: Myth or Reality?',
-			channelTitle: 'SecretumVaticana',
+			title: 'Discover Guardians of the Car, the best presale crypto memecoin project',
+			channelTitle: 'INFOtime',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/GeCodRjs1Bs/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/B_2C1A99QQE/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-04-28T14:00:00Z',
 			description:
-				'Investigating claims of a secret agreement between the Vatican and demonic forces. Former priests share shocking revelations about rituals in hidden chambers.',
+				'An introduction to the Guardians of the Car memecoin project, highlighting its presale potential and unique features.',
 		},
 		statistics: {
-			viewCount: '120K',
-			likeCount: '15K',
-			commentCount: '2.7K',
+			viewCount: '1.4M',
+			likeCount: '50K',
+			commentCount: '8K',
 		},
 	},
 	{
-		id: 'yZkb78jEmjc',
+		id: 'QBMxH3X4-Aw',
 		snippet: {
-			title: 'Vatican’s Lost Gospel: References to Hell Uncovered',
-			channelTitle: 'MysticScholars',
+			title: 'New 100X Solana Meme Coin #Solaxy Is Getting Bigger!! Biggest Presale Now!!',
+			channelTitle: 'Bitcoin & Altcoins Price Analysis',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/yZkb78jEmjc/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/QBMxH3X4-Aw/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-04-25T10:30:00Z',
 			description:
-				'A recently discovered gospel fragment in the Vatican’s vaults mentions a descent into hell. Experts analyze its authenticity and implications.',
+				'Exploring the explosive growth of Solaxy, a Solana-based memecoin with massive presale hype and 100X potential.',
 		},
 		statistics: {
-			viewCount: '180K',
-			likeCount: '20K',
-			commentCount: '3.5K',
+			viewCount: '356K',
+			likeCount: '15K',
+			commentCount: '2.5K',
 		},
 	},
 	{
-		id: 'rzxzf0XJUBc',
+		id: 'R6uJSkwCqWs',
 		snippet: {
-			title: 'The Vatican’s Exorcism Secrets: Battling Demons',
-			channelTitle: 'HolyMysteries',
+			title: 'How I Made $9,000/day Trading Memecoins (Step-by-Step tutorial)',
+			channelTitle: 'Champ',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/rzxzf0XJUBc/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/R6uJSkwCqWs/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-04-20T09:00:00Z',
 			description:
-				'Inside the Vatican’s elite exorcism training program. Learn about the Church’s fight against demonic possession and its classified protocols.',
+				'A detailed step-by-step tutorial on trading memecoins to achieve high daily profits, based on real trading strategies.',
 		},
 		statistics: {
-			viewCount: '90K',
-			likeCount: '10K',
-			commentCount: '1.8K',
+			viewCount: '1.8M',
+			likeCount: '60K',
+			commentCount: '10K',
 		},
 	},
 	{
-		id: 'qpkeqJpNJjs',
+		id: 'xcSB_jycKpY',
 		snippet: {
-			title: 'Vatican Conspiracies: The Hellfire Prophecy',
-			channelTitle: 'TruthUnveiled',
+			title: 'The EVIL Way to Get Rich With Memecoins',
+			channelTitle: 'Mr.Profit',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/qpkeqJpNJjs/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/xcSB_jycKpY/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-04-15T12:00:00Z',
 			description:
-				'A leaked Vatican prophecy predicts a fiery cataclysm linked to hell. Is the Church preparing for an apocalyptic event? Experts weigh in.',
+				'A controversial take on unconventional and risky strategies to profit from memecoins in the crypto market.',
 		},
 		statistics: {
-			viewCount: '110K',
-			likeCount: '12K',
-			commentCount: '2.2K',
+			viewCount: '876K',
+			likeCount: '30K',
+			commentCount: '5K',
 		},
 	},
 	{
-		id: '5DFhiJ-FYtU',
+		id: 'fTogievzB1s',
 		snippet: {
-			title: 'The Vatican’s Forbidden Texts: Secrets of the Abyss',
-			channelTitle: 'ArcaneVault',
+			title: 'What is Driving the Memecoin Craze? Should You Invest? | Vantage With Palki Sharma | N18G',
+			channelTitle: 'Firstpost',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/5DFhiJ-FYtU/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/fTogievzB1s/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-04-10T11:00:00Z',
 			description:
-				'Ancient manuscripts locked in the Vatican describe a realm of eternal torment. Why are these texts kept from the public?',
+				'An in-depth analysis of the memecoin phenomenon, exploring its drivers and whether it’s a viable investment.',
 		},
 		statistics: {
-			viewCount: '160K',
-			likeCount: '19K',
-			commentCount: '4K',
+			viewCount: '3.2M',
+			likeCount: '100K',
+			commentCount: '15K',
 		},
 	},
 	{
-		id: 'O20T9rfiCtg',
+		id: 'atd6SsNG9oE',
 		snippet: {
-			title: 'Vatican’s Role in Suppressing Hell Lore',
-			channelTitle: 'HiddenTruths',
+			title: 'TRADING MEMECOINS FOR PROFIT | LIVE TRADING MEME COINS ON SOLANA & BNB',
+			channelTitle: 'Jerzy NFT',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/O20T9rfiCtg/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/atd6SsNG9oE/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-04-05T15:00:00Z',
 			description:
-				'Did the Vatican deliberately erase references to hell from early Christian texts? This exposé uncovers the Church’s censorship campaign.',
+				'A live trading session showcasing profitable memecoin trading strategies on Solana and BNB blockchains.',
 		},
 		statistics: {
-			viewCount: '130K',
-			likeCount: '16K',
-			commentCount: '3.2K',
+			viewCount: '142K',
+			likeCount: '8K',
+			commentCount: '1.5K',
 		},
 	},
 	{
-		id: '39nH69s8KII',
+		id: '5rI378lrOBc',
 		snippet: {
-			title: 'Decoding the Vatican’s Inferno Codex',
-			channelTitle: 'SacredSecrets',
+			title: 'How To ACTUALLY Trade Memecoins (Full Guide 2024)',
+			channelTitle: 'Champ',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/39nH69s8KII/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/5rI378lrOBc/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-04-01T13:00:00Z',
 			description:
-				'A rare Vatican codex contains cryptic references to a fiery underworld. Scholars attempt to decipher its apocalyptic warnings.',
+				'A complete guide to trading memecoins, covering tools, platforms, and strategies for success in 2024.',
 		},
 		statistics: {
-			viewCount: '85K',
-			likeCount: '9K',
-			commentCount: '1.5K',
+			viewCount: '1.2M',
+			likeCount: '40K',
+			commentCount: '7K',
 		},
 	},
 	{
-		id: '-5enjAOb978',
+		id: 'ROP0oXwuyuA',
 		snippet: {
-			title: 'Vatican Cover-Ups: The Hellgate Conspiracy',
-			channelTitle: 'DarkEnigma',
+			title: 'How To Get Rich With Memecoins In 2025',
+			channelTitle: 'Champ',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/-5enjAOb978/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/ROP0oXwuyuA/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-03-28T10:00:00Z',
 			description:
-				'Rumors of a hidden portal to hell beneath the Vatican. Insiders reveal attempts to suppress this explosive secret.',
+				'Another expert guide on leveraging memecoins for significant profits in 2025 with practical tips and insights.',
 		},
 		statistics: {
-			viewCount: '140K',
-			likeCount: '17K',
-			commentCount: '2.9K',
+			viewCount: '1.8M',
+			likeCount: '55K',
+			commentCount: '9K',
 		},
 	},
 	{
-		id: 'FQ119ytSLfc',
+		id: 'mO1YyLWE5V0',
 		snippet: {
-			title: 'The Vatican’s Dark Rituals: Truth or Fiction?',
-			channelTitle: 'MysteryFiles',
+			title: 'Watch Me LIVE Make $50,000 Trading Crypto Memecoins',
+			channelTitle: 'Alex Choi Crypto',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/FQ119ytSLfc/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/mO1YyLWE5V0/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-03-25T12:00:00Z',
 			description:
-				'Allegations of secret rituals linked to infernal forces in Vatican catacombs. We investigate the evidence behind these claims.',
+				'A live demonstration of trading memecoins to achieve massive profits, with real-time insights and strategies.',
 		},
 		statistics: {
-			viewCount: '100K',
-			likeCount: '11K',
-			commentCount: '2.1K',
+			viewCount: '2.3M',
+			likeCount: '70K',
+			commentCount: '12K',
 		},
 	},
 	{
-		id: 'VTjbZ7jVhOQ',
+		id: '68RTFD4t35Q',
 		snippet: {
-			title: 'Top 5 Vatican Secrets About the Underworld',
-			channelTitle: 'OccultInsights',
+			title: 'Memecoins aren’t dead, they’re just misunderstood',
+			channelTitle: 'Orangie Web3',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/VTjbZ7jVhOQ/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/68RTFD4t35Q/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-03-20T14:00:00Z',
 			description:
-				'From cursed artifacts to hidden texts, we reveal the Vatican’s top five secrets about hell and its mysteries.',
+				'An exploration of the enduring value and potential of memecoins, debunking myths about their decline.',
 		},
 		statistics: {
-			viewCount: '95K',
-			likeCount: '10.5K',
-			commentCount: '1.9K',
+			viewCount: '856K',
+			likeCount: '25K',
+			commentCount: '4.5K',
 		},
 	},
 	{
-		id: 'jxMOetCCmLU',
+		id: '9zBe0zisqTw',
 		snippet: {
-			title: 'Vatican’s Apocalypse Vault: Hell’s Blueprint',
-			channelTitle: 'EndTimesNow',
+			title: 'How To Rug Pull PUMP FUN Memecoin In 2025 (FOR BEGINNERS)',
+			channelTitle: 'EducationalPasha',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/jxMOetCCmLU/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/9zBe0zisqTw/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-03-15T11:00:00Z',
 			description:
-				'A secret Vatican vault reportedly holds a blueprint of hell. Is this part of an end-times prophecy? Experts analyze the clues.',
+				'An educational video explaining the mechanics of a rug pull on Pump Fun memecoins, for awareness purposes.',
 		},
 		statistics: {
-			viewCount: '125K',
-			likeCount: '14K',
-			commentCount: '2.8K',
+			viewCount: '420K',
+			likeCount: '12K',
+			commentCount: '2K',
 		},
 	},
 	{
-		id: 'R00dqYkE1J8',
+		id: '3cWK8NPqT-c',
 		snippet: {
-			title: 'How the Vatican Shapes Hell Mythology',
-			channelTitle: 'MythicTruth',
+			title: '380 Days Of Memecoin Trading Knowledge In 38 Minutes',
+			channelTitle: 'sajad',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/R00dqYkE1J8/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/3cWK8NPqT-c/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-03-10T09:00:00Z',
 			description:
-				'The Vatican’s influence on modern perceptions of hell. Discover how the Church crafted narratives to control the faithful.',
+				'A condensed overview of a year’s worth of memecoin trading experience, packed into a 38-minute guide.',
 		},
 		statistics: {
-			viewCount: '80K',
-			likeCount: '8.5K',
-			commentCount: '1.4K',
+			viewCount: '1.1M',
+			likeCount: '35K',
+			commentCount: '6K',
 		},
 	},
 	{
-		id: 'q7cGysKCfmQ',
+		id: '09Y-a9sBhrA',
 		snippet: {
-			title: 'The Vatican’s Demonology Archives Exposed',
-			channelTitle: 'ForbiddenLore',
+			title: 'How to Trade Memecoins with Photon',
+			channelTitle: 'Crypto Gorilla',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/q7cGysKCfmQ/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/09Y-a9sBhrA/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-03-05T16:00:00Z',
 			description:
-				'Leaked documents from the Vatican reveal a detailed study of demons and hell. What does the Church know that we don’t?',
+				'A tutorial on using the Photon platform to trade memecoins efficiently, with tips for maximizing profits.',
 		},
 		statistics: {
-			viewCount: '170K',
-			likeCount: '21K',
-			commentCount: '4.2K',
+			viewCount: '723K',
+			likeCount: '22K',
+			commentCount: '3.8K',
 		},
 	},
 	{
-		id: 'R3PDfBoyrSY',
+		id: 'zxMJ0w59nEs',
 		snippet: {
-			title: 'Vatican’s Biggest Secret: The Hell Codex',
-			channelTitle: 'CrypticRevelations',
+			title: 'Dexscreener BEST settings for Solana Meme Coins (2x $$$ in 1-hour)',
+			channelTitle: 'iCoin',
 			thumbnails: {
 				medium: {
-					url: 'https://i.ytimg.com/vi/R3PDfBoyrSY/mqdefault.jpg',
+					url: 'https://i.ytimg.com/vi/zxMJ0w59nEs/mqdefault.jpg',
 					width: 320,
 					height: 180,
 				},
 			},
 			publishedAt: '2025-03-01T13:00:00Z',
 			description:
-				'A forbidden codex in the Vatican reportedly details the geography of hell. This video uncovers its origins and contents.',
+				'Optimal Dexscreener settings for trading Solana memecoins, designed to double profits in just one hour.',
 		},
 		statistics: {
-			viewCount: '105K',
-			likeCount: '13K',
-			commentCount: '2.3K',
+			viewCount: '568K',
+			likeCount: '18K',
+			commentCount: '3K',
 		},
 	},
 ]
 
-export default VideoData
+export default VideoData;
