@@ -43,28 +43,7 @@ const VideoData = [
 			commentCount: '8K',
 		},
 	},
-	{
-		id: 'QBMxH3X4-Aw',
-		snippet: {
-			title: 'New 100X Solana Meme Coin #Solaxy Is Getting Bigger!! Biggest Presale Now!!',
-			channelTitle: 'Bitcoin & Altcoins Price Analysis',
-			thumbnails: {
-				medium: {
-					url: 'https://i.ytimg.com/vi/QBMxH3X4-Aw/mqdefault.jpg',
-					width: 320,
-					height: 180,
-				},
-			},
-			publishedAt: '2025-04-25T10:30:00Z',
-			description:
-				'Exploring the explosive growth of Solaxy, a Solana-based memecoin with massive presale hype and 100X potential.',
-		},
-		statistics: {
-			viewCount: '356K',
-			likeCount: '15K',
-			commentCount: '2.5K',
-		},
-	},
+	
 	{
 		id: 'R6uJSkwCqWs',
 		snippet: {

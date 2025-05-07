@@ -8,6 +8,7 @@ import HistoryIcon from '@mui/icons-material/History';
 import XIcon from '@mui/icons-material/X';
 import MenuIcon from '@mui/icons-material/Menu';
 import VideoData from '../data/VideoData';
+import "./sidebar.css"
 
 // Futuristic Color Palette
 const colors = {
@@ -416,130 +417,130 @@ const Navigation = () => {
 
   return (
     <>
-      <nav ref={navbarRef} style={navbarStyle}>
-        <NavLink
-          to="/"
-          style={logoStyle}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = colors.accent.cyan;
-            e.currentTarget.style.transform = 'scale(1.05)';
-            e.currentTarget.style.animation = 'pulse 1.5s infinite';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = colors.text.primary;
-            e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.animation = 'none';
-          }}
-        >
-          <VideoLibraryIcon
-            style={{
-              color: colors.text.primary,
-              fontSize: isMobile ? '26px' : '30px',
-              transition: 'all 0.3s ease',
-            }}
-          />
-          TrenchesTube
-        </NavLink>
-        <div style={searchContainerStyle} id="search-container">
-          <input
-            type="text"
-            placeholder="Explore the grid..."
-            style={searchInputStyle}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onFocus={(e) => {
-              e.target.style.color = colors.text.highlight;
-              document.querySelector('#search-container').style.borderColor = colors.accent.cyan;
-              document.querySelector('#search-container').style.boxShadow = `0 0 12px ${colors.accent.cyan}`;
-            }}
-            onBlur={(e) => {
-              e.target.style.color = colors.text.primary;
-              document.querySelector('#search-container').style.borderColor = colors.border.primary;
-              document.querySelector('#search-container').style.boxShadow = 'none';
-            }}
-          />
-          <SearchIcon
-            style={searchIconStyle}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = colors.accent.cyan;
-              e.currentTarget.style.transform = 'scale(1.15)';
-              e.currentTarget.style.animation = 'pulse 1.5s infinite';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = colors.text.secondary;
-              e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.style.animation = 'none';
-            }}
-          />
-          {filteredVideos.length > 0 && (
-            <div style={searchResultsStyle}>
-              {filteredVideos.map((video) => (
-                <NavLink
-                  to={`/video/${video.id}`}
-                  key={video.id}
-                  style={{ textDecoration: 'none' }}
-                  onClick={() => setSearchQuery('')}
-                >
-                  <div
-                    style={searchResultItemStyle}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = colors.background.tertiary;
-                      e.currentTarget.style.borderColor = colors.accent.cyan;
-                      e.currentTarget.style.animation = 'pulse 1.5s infinite';
-                      e.currentTarget.querySelector('img').style.borderColor = colors.accent.cyan;
-                      e.currentTarget.querySelector('img').style.boxShadow = `0 0 8px ${colors.accent.cyan}`;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                      e.currentTarget.style.borderColor = colors.border.primary;
-                      e.currentTarget.style.animation = 'none';
-                      e.currentTarget.querySelector('img').style.borderColor = colors.border.primary;
-                      e.currentTarget.querySelector('img').style.boxShadow = 'none';
-                    }}
-                  >
-                    <img
-                      src={video.snippet.thumbnails.medium.url}
-                      alt={video.snippet.title}
-                      style={thumbnailStyle}
-                      onError={(e) => {
-                        e.target.src = 'https://i.ytimg.com/vi/default.jpg';
-                      }}
-                    />
-                    <div style={resultTextStyle}>
-                      <div style={resultTitleStyle}>{video.snippet.title}</div>
-                      <div style={resultChannelStyle}>{video.snippet.channelTitle}</div>
-                    </div>
-                  </div>
-                </NavLink>
-              ))}
-            </div>
-          )}
-        </div>
-        {!isMobile && (
-          <div
-            style={toggleButtonStyle}
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = colors.accent.cyan;
-              e.currentTarget.style.animation = 'glow 1.5s infinite';
-              e.currentTarget.style.transform = 'scale(1.1)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = colors.background.secondary;
-              e.currentTarget.style.animation = 'none';
-              e.currentTarget.style.transform = 'scale(1)';
-            }}
+    <nav ref={navbarRef} style={navbarStyle}>
+  <NavLink
+    to="/"
+    style={logoStyle}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.color = colors.accent.cyan;
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.color = colors.text.primary;
+    }}
+  >
+    <VideoLibraryIcon
+      style={{
+        color: colors.text.primary,
+        fontSize: isMobile ? '26px' : '30px',
+      }}
+    />
+    Trenches
+    <span style={{ color: 'yellow', textShadow: '0 0 6px gold' }}>Tube</span>
+    
+  </NavLink>
+
+  <div style={searchContainerStyle} id="search-container">
+    <input
+      type="text"
+      placeholder="Explore the grid..."
+      style={searchInputStyle}
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      onFocus={(e) => {
+        e.target.style.color = colors.text.highlight;
+        document.querySelector('#search-container').style.borderColor = colors.accent.cyan;
+        document.querySelector('#search-container').style.boxShadow = `0 0 12px ${colors.accent.cyan}`;
+      }}
+      onBlur={(e) => {
+        e.target.style.color = colors.text.primary;
+        document.querySelector('#search-container').style.borderColor = colors.border.primary;
+        document.querySelector('#search-container').style.boxShadow = 'none';
+      }}
+    />
+    <SearchIcon
+      style={searchIconStyle}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.color = colors.accent.cyan;
+        e.currentTarget.style.transform = 'scale(1.15)';
+        e.currentTarget.style.animation = 'pulse 1.5s infinite';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.color = colors.text.secondary;
+        e.currentTarget.style.transform = 'scale(1)';
+        e.currentTarget.style.animation = 'none';
+      }}
+    />
+    {filteredVideos.length > 0 && (
+      <div style={searchResultsStyle}>
+        {filteredVideos.map((video) => (
+          <NavLink
+            to={`/video/${video.id}`}
+            key={video.id}
+            style={{ textDecoration: 'none' }}
+            onClick={() => setSearchQuery('')}
           >
-            <MenuIcon
-              style={{
-                color: colors.text.primary,
-                fontSize: '26px',
-                transition: 'all 0.3s ease',
+            <div
+              style={searchResultItemStyle}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = colors.background.tertiary;
+                e.currentTarget.style.borderColor = colors.accent.cyan;
+                e.currentTarget.style.animation = 'pulse 1.5s infinite';
+                e.currentTarget.querySelector('img').style.borderColor = colors.accent.cyan;
+                e.currentTarget.querySelector('img').style.boxShadow = `0 0 8px ${colors.accent.cyan}`;
               }}
-            />
-          </div>
-        )}
-      </nav>
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.borderColor = colors.border.primary;
+                e.currentTarget.style.animation = 'none';
+                e.currentTarget.querySelector('img').style.borderColor = colors.border.primary;
+                e.currentTarget.querySelector('img').style.boxShadow = 'none';
+              }}
+            >
+              <img
+                src={video.snippet.thumbnails.medium.url}
+                alt={video.snippet.title}
+                style={thumbnailStyle}
+                onError={(e) => {
+                  e.target.src = 'https://i.ytimg.com/vi/default.jpg';
+                }}
+              />
+              <div style={resultTextStyle}>
+                <div style={resultTitleStyle}>{video.snippet.title}</div>
+                <div style={resultChannelStyle}>{video.snippet.channelTitle}</div>
+              </div>
+            </div>
+          </NavLink>
+        ))}
+      </div>
+    )}
+  </div>
+
+  {!isMobile && (
+    <div
+      style={toggleButtonStyle}
+      onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.backgroundColor = colors.accent.cyan;
+        e.currentTarget.style.animation = 'glowPulse 2s infinite';
+        e.currentTarget.style.transform = 'scale(1.1)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = colors.background.secondary;
+        e.currentTarget.style.animation = 'none';
+        e.currentTarget.style.transform = 'scale(1)';
+      }}
+    >
+      <MenuIcon
+        style={{
+          color: colors.text.primary,
+          fontSize: '26px',
+          transition: 'all 0.3s ease',
+        }}
+      />
+    </div>
+  )}
+</nav>
+
 
       <nav ref={sidebarRef} style={sidebarStyle}>
         {!isMobile && (
@@ -586,7 +587,7 @@ const Navigation = () => {
           ))}
         </ul>
         <a
-          href="https://x.com/popetube_sol"
+          href="https://x.com/trenchestube"
           target="_blank"
           rel="noopener noreferrer"
           style={hoveredLink === 'follow-us' ? hoverLinkStyle : linkStyle}
